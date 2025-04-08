@@ -10,7 +10,7 @@ describe('My Login application', async() => {
         await $('[data-modal-view="bundle_modal"]').click()
         const title = await browser.getTitle()
         expect(title).toEqual('An Insurance Company For Your Car And More | GEICO')
-        console.log('===============>',title)
+       // console.log('===============>',title)
         console.log(await $('[data-product="auto"]').getAttribute('data-product'))
     })
 })
