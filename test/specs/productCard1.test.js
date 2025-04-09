@@ -15,6 +15,5 @@ describe('Testcase 1: Product Cards Verification', () => {
     it('should verify all product cards have required elements', async () => {
         const isValid = await homePage.validateProductsDetails();
         expect(isValid).to.be.true;
-        console.log('\n✅ All product cards have required elements.\n');
     });
 });

@@ -1,13 +1,14 @@
 import LoginPage from '../pageobjects/login.page.js';
 import HomePage from '../pageobjects/home.page.js';
 import CartPage from '../pageobjects/cart.page.js';
+import { PRODUCTS } from '../pageobjects/constants.js';
 import { expect } from 'chai';
 
 describe('Remove product from cart and continue shopping', () => {
     before(async () => {
         await LoginPage.open();
         await LoginPage.login();
-        await HomePage.addProductsToCart([0, 1]);
+        await HomePage.addProductsToCart(PRODUCTS.firstProduct, PRODUCTS.secondProduct);
         await HomePage.goToCart();
     });
 

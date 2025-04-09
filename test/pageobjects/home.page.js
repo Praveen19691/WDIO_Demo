@@ -80,9 +80,11 @@ class HomePage extends BasePage {
     }
     
 
-    async addProductsToCart(indices = []) {
-        const buttons = await this.addToCartButtons;
-        for (let i of indices) {
+    async addProductsToCart(...products) {
+        const buttons = await this.addToCartButtons.forEach(async button => {
+            await button.waitForDisplayed({ timeout: TIMEOUT })
+        })
+        for (let i of products) {
             await buttons[i].waitForClickable({ timeout: TIMEOUT });
             await buttons[i].click();
             await browser.pause(500);
