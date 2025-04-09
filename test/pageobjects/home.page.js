@@ -80,13 +80,16 @@ class HomePage extends BasePage {
     }
     
 
-    async addProductsToCart(indices = []) {
-        const buttons = await this.addToCartButtons;
-        for (let i of indices) {
-            await buttons[i].waitForClickable({ timeout: TIMEOUT });
-            await buttons[i].click();
+    async addProductsToCart(...products) {
+        const buttons = await this.addToCartButtons
+        await this.addToCartButtons.forEach(async button => {
+            await button.waitForDisplayed({ timeout: TIMEOUT })
+        })
+        products.forEach(async (product) => {
+            await buttons[product].waitForClickable({ timeout: TIMEOUT });
+            await buttons[product].click();
             await browser.pause(500);
-        }
+        })
     }
 
     async getCartCount() {
