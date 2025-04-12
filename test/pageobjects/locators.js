@@ -18,5 +18,12 @@ export const HomeLocators = {
 export const CartLocators = {
     cartItems: '.cart_item',
     removeButtons: '.cart_button',
-    continueShopping: '#continue-shopping'
+    continueShopping: '#continue-shopping',
+    checkout: '[data-test="checkout"]'
+};
+
+export const CheckoutLocators = {
+    checkoutForm: '.checkout_info',
+    continue: '[data-test="continue"]',
+    errorMsg: '[data-test="error"]'
 };

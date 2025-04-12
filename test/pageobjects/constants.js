@@ -11,8 +11,12 @@ export const SORT_OPTIONS = {
 };
 
 export const PRODUCTS = {
-    firstProduct: 1,
-    secondProduct: 2
-}
+    firstProduct: 0,
+    secondProduct: 1
+};
 
 export const TIMEOUT = 5000;
+
+export const ERROR_MESSAGES = {
+    firstNameRequired: 'Error: First Name is required'
+};

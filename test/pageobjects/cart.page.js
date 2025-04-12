@@ -5,6 +5,7 @@ class CartPage extends BasePage {
     get cartItems() { return $$(CartLocators.cartItems); }
     get removeButtons() { return $$(CartLocators.removeButtons); }
     get continueShoppingButton() { return $(CartLocators.continueShopping); }
+    get checkoutBtn() { return $(CartLocators.checkout); }
 
     async removeProductByIndex(index) {
         const buttons = await this.removeButtons;
@@ -22,11 +23,17 @@ class CartPage extends BasePage {
         await this.click(this.continueShoppingButton);
     }
 
-    async areProductsPresent(indices = []) {
-        const items = await this.cartItems;
-        return indices.every(index => items[index]);
+    async checkout() {
+        await this.click(this.checkoutBtn);
     }
 
+    async areProductsPresent(...indices) {
+        const flatIndices = indices.flat();
+    
+        const items = await $$('.cart_item');
+        return flatIndices.every(index => items[index]);
+    }
+    
 }
 
 export default new CartPage();

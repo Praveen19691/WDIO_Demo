@@ -94,27 +94,33 @@ class HomePage extends BasePage {
 
     async getCartCount() {
         await this.cartBadge.waitForDisplayed({ timeout: TIMEOUT });
+        await browser.pause(3000);
         return await this.cartBadge.getText();
     }
 
-    async areRemoveButtonsVisible(indices = []) {
+    async areRemoveButtonsVisible(...indices) {
         const buttons = await this.addToCartButtons;
-        for (let i of indices) {
+    
+        const flatIndices = indices.flat();
+    
+        for (let i of flatIndices) {
             await buttons[i].waitForDisplayed({ timeout: TIMEOUT });
             const buttonText = await buttons[i].getText();
             if (buttonText !== 'Remove') return false;
         }
         return true;
     }
-
+    
     async goToCart() {
         await this.cartIcon.waitForClickable({ timeout: TIMEOUT });
         await this.cartIcon.click();
+        await browser.pause(5000);
     }
 
     async isAddToCartVisible(index) {
         const buttons = await this.addToCartButtons;
         await buttons[index].waitForDisplayed({ timeout: TIMEOUT });
+        await browser.pause(5000);
         return await buttons[index].isDisplayed();
     }
 
