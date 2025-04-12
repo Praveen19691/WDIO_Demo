@@ -50,7 +50,10 @@ export const config = {
     // https://saucelabs.com/platform/platform-configurator
     //
     capabilities: [{
-        browserName: 'chrome'
+        browserName: 'chrome',
+        acceptInsecureCerts: true, 'goog:chromOptions' : {
+            args: ['--disable-popup-block']
+        }
     }],
 
     //
@@ -226,8 +229,13 @@ export const config = {
      * @param {boolean} result.passed    true if test has passed, otherwise false
      * @param {object}  result.retries   information about spec related retries, e.g. `{ attempts: 0, limit: 0 }`
      */
-    // afterTest: function(test, context, { error, result, duration, passed, retries }) {
-    // },
+    afterTest: function(test, context, { error, result, duration, passed, retries }) {
+        if (error) {
+            console.log(`Test Failed: ${test.title}`);
+        } else {
+            console.log(`Test Passed: ${test.title}`);
+        }
+     },
 
 
     /**
