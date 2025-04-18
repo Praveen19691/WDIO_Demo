@@ -1,23 +1,20 @@
-import { TIMEOUT } from './constants.js';
-
-class BasePage {
-    async click(element, timeout = TIMEOUT) {
-        await element.waitForClickable({ timeout });
-        await element.click();
+module.exports = class BasePage {
+    async waitForElement(selector) {
+      await $(selector).waitForExist({ timeout: 5000 });
     }
-
-    async type(element, text, timeout = TIMEOUT) {
-        await element.waitForDisplayed({ timeout });
-        await element.setValue(text);
+   
+    async clickElement(selector) {
+      await this.waitForElement(selector);
+      await $(selector).click();
     }
-
-    async getElementsText(elements) {
-        const textArr = [];
-        for (let el of await elements) {
-            textArr.push(await el.getText());
-        }
-        return textArr;
+   
+    async getText(selector) {
+      await this.waitForElement(selector);
+      return await $(selector).getText();
     }
-}
-
-export default BasePage;
+   
+    async isDisplayed(selector) {
+      await this.waitForElement(selector);
+      return await $(selector).isDisplayed();
+    }
+  };
