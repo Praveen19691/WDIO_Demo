@@ -15,8 +15,24 @@ export const HomeLocators = {
     cartIcon: '.shopping_cart_link'
 };
 
-export const CartLocators = {
-    cartItems: '.cart_item',
-    removeButtons: '.cart_button',
-    continueShopping: '#continue-shopping'
+export const cartPage= {
+    productID1: '#add-to-cart-sauce-labs-backpack',
+    productID2: '#add-to-cart-sauce-labs-bike-light',
+    productID3: '#add-to-cart-sauce-labs-bolt-t-shirt',
+    cartTitle: '.title',
+    cartButton: '.shopping_cart_link',
+    productId_remove:'#remove-sauce-labs-bike-light',
+    cartBadge: '.shopping_cart_badge',
+    cartButton: '.shopping_cart_link',
+};
+
+export const checkoutPage= {
+    checkoutTitle: '.title',
+    checkoutButton: '#checkout',
+    first_name: '#first-name',
+    last_name: '#last-name',
+    postal_code: '#postal-code',
+    continue: '#continue',
+    finish: '#finish',
+    continue_shopping: '#continue-shopping',
 };

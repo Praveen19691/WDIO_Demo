@@ -1,27 +1,27 @@
 import Basepage from "./base.page";
-import locators from "./Gajender.locators";
+import { checkoutPage } from "./locators";
 
 class CheckoutPage extends Basepage {
     get checkoutTitle() {
-        return $(locators.checkoutPage.checkoutTitle);
+        return $(checkoutPage.checkoutTitle);
     }
     get checkoutButton() {
-        return $(locators.checkoutPage.checkoutButton);
+        return $(checkoutPage.checkoutButton);
     }
     get first_name() {
-        return $(locators.checkoutPage.first_name);
+        return $(checkoutPage.first_name);
     }
     get last_name() {
-        return $(locators.checkoutPage.last_name);
+        return $(checkoutPage.last_name);
     }
     get postal_code() {
-        return $(locators.checkoutPage.postal_code);
+        return $(checkoutPage.postal_code);
     }
     get continue() {
-        return $(locators.checkoutPage.continue);
+        return $(checkoutPage.continue);
     }
     get finish() {
-        return $(locators.checkoutPage.finish);
+        return $(checkoutPage.finish);
     }
 
 
