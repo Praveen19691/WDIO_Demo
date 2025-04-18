@@ -1,32 +1,33 @@
-import BasePage from './base.page.js';
-import { CartLocators } from './locators.js';
-
+const BasePage = require('./base.page');
+const locators = require('../locators').cart;
+ 
 class CartPage extends BasePage {
-    get cartItems() { return $$(CartLocators.cartItems); }
-    get removeButtons() { return $$(CartLocators.removeButtons); }
-    get continueShoppingButton() { return $(CartLocators.continueShopping); }
-
-    async removeProductByIndex(index) {
-        const buttons = await this.removeButtons;
-        if (buttons[index]) {
-            await buttons[index].click();
-        }
+  get checkoutBtn() {
+    return $(locators.checkoutBtn); // Make sure locator key is correct
+  }
+ 
+  get continueShoppingBtn() {
+    return $(locators.continueShopping);
+  }
+ 
+  async clickCheckout() {
+    await this.checkoutBtn.waitForDisplayed({ timeout: 10000 });
+    await this.checkoutBtn.waitForClickable({ timeout: 10000 });
+await this.checkoutBtn.click();
+  }
+ 
+  async getCartItems() {
+    return await $$(locators.cartItem);
+  }
+ 
+  async removeItemByIndex(index) {
+    const removeBtns = await $$(locators.removeBtn);
+    if (index >= removeBtns.length) {
+      throw new Error(`Cannot remove item. Index ${index} is out of range. Found ${removeBtns.length} remove buttons.`);
     }
-
-    async isProductRemoved(index) {
-        const items = await this.cartItems;
-        return !items[index];
-    }
-    
-    async continueShopping() {
-        await this.click(this.continueShoppingButton);
-    }
-
-    async areProductsPresent(indices = []) {
-        const items = await this.cartItems;
-        return indices.every(index => items[index]);
-    }
-
+    await removeBtns[index].waitForClickable({ timeout: 5000 });
+    await removeBtns[index].click();
+  }
 }
-
-export default new CartPage();
+ 
+module.exports = new CartPage();
