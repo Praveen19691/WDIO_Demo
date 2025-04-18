@@ -21,7 +21,7 @@ export const config = {
     // of the config file unless it's absolute.
     //
     specs: [
-        './test/specs/**/*.js'
+        './test/specs/test7.spec.js'
     ],
     // Patterns to exclude.
     exclude: [

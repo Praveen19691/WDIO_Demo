@@ -12,6 +12,64 @@ class HomePage extends BasePage {
     get cartBadge() { return $(HomeLocators.cartBadge); }
     get cartIcon() { return $(HomeLocators.cartIcon); }
 
+    get inventory_item () {
+        return $$(HomeLocators.inventoryItems);
+    }
+    get Dropdown() { 
+        return $(HomeLocators.sortDropdown); 
+    }
+
+    async sortLowToHigh() {
+        await this.Dropdown.waitForDisplayed({timeout: 5000});
+        await this.Dropdown.selectByAttribute('value', 'lohi');
+    }
+
+    async sortHighToLow() {
+        await this.Dropdown.waitForDisplayed({timeout: 5000});
+        await this.Dropdown.selectByAttribute('value', 'hilo');
+    }
+
+    async sortZtoA() {
+        await this.Dropdown.waitForDisplayed({timeout: 5000});
+        await this.Dropdown.selectByAttribute('value', 'za');
+    }
+
+    async sortAtoZ() {
+        await this.Dropdown.waitForDisplayed({timeout: 5000});
+        await this.Dropdown.selectByAttribute('value', 'az');
+    }
+
+    async validateAllCards() {
+        const items = await this.inventory_item;
+   
+        for (let i = 0; i < items.length; i++) {
+            const item = items[i];
+   
+            await item.waitForDisplayed({ timeout: 5000 });
+   
+            const name = await item.$(locators.homePage.inventory_item_name);
+            const desc = await item.$(locators.homePage.inventory_item_desc);
+            const price = await item.$(locators.homePage.inventory_item_price);
+            const addToCart = await item.$('button');
+   
+            await name.waitForDisplayed({ timeout: 3000 });
+            await desc.waitForDisplayed({ timeout: 3000 });
+            await price.waitForDisplayed({ timeout: 3000 });
+            await addToCart.waitForDisplayed({ timeout: 3000 });
+   
+            const allVisible = await Promise.all([
+                name.isDisplayed(),
+                desc.isDisplayed(),
+                price.isDisplayed(),
+                addToCart.isDisplayed()
+            ]);
+   
+            if (allVisible.includes(false)) return false;
+        }
+   
+        return true;
+    }
+
     async getProductPricesAsNumbers() {
         await browser.waitUntil(
             async () => (await this.productPrices).length > 0,
